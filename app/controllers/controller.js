@@ -7,7 +7,7 @@ export let renderFoodList = (list) => {
     let contentHTML = ""
     list.forEach((food) => {
         let {ma, ten, loai, gia, khuyenMai, moTa, tinhTrang} = food
-        let trString = /*html*/ `
+        let trString = `
                 <tr>
                     <td class="text-center">${ma}</td>
                     <td class="text-center">${ten}</td>
@@ -32,10 +32,8 @@ export let fetchFoodList = () => {
         .get(BASE_URL)
         .then((res) => {
             renderFoodList(res.data)
-            console.log(res)
         })
         .catch((err) => {
-            console.log(err)
         })
 }
 
@@ -61,4 +59,13 @@ export function layThongTinTuForm() {
     let hinhMon = document.getElementById("hinhMon").value;
     let moTa = document.getElementById("moTa").value;
     return {ma, ten, loai, gia, khuyenMai, tinhTrang, hinhMon, moTa}
+}
+
+export let showMessage = (message, isSuccess = true) => {
+    Toastify({
+        text: message,
+        style: {
+            background: isSuccess ? "#2baabe" : "red",
+        }
+      }).showToast();
 }
